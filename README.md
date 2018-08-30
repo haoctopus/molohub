@@ -10,7 +10,7 @@
 
 - [molohub组件](https://github.com/haoctopus/molohub)
 
-下载`molohub`文件夹，保存在`%APPDATA%/.homeassistant/custom_components/`目录中。
+下载`molohub`文件夹，保存在`homeassistant配置目录/custom_components/`目录中。
 
 **【HA中配置实例】**
 
@@ -49,7 +49,7 @@ when Home Assistant runs under the LAN, if you want to access the HA remotely th
 
 - [molohub component](https://github.com/haoctopus/molohub)
 
-Download `molohub` folder and put it under `%APPDATA%/.homeassistant/custom_components/`.
+Download `molohub` folder and put it under `homeassistant configuration directory/custom_components/`.
 
 **【Configuration】**
 
