@@ -9,7 +9,8 @@
 **【安装软件】**
 
 - [molohub组件](https://github.com/haoctopus/molohub)
-  下载molohub文件夹，保存在`HomeAssistant配置目录/custom_components/`目录中。
+
+下载molohub文件夹，保存在`HomeAssistant配置目录/custom_components/`目录中。
 
 **【HA中配置实例】**
 
