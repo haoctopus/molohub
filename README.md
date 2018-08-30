@@ -1,4 +1,4 @@
-## **【简介】**
+## **【中文简介】**
 
 ![img](README/xmolo-zx.png)
 
@@ -10,7 +10,7 @@
 
 - [molohub组件](https://github.com/haoctopus/molohub)
 
-下载molohub文件夹，保存在`HomeAssistant配置目录/custom_components/`目录中。
+下载`molohub`文件夹，保存在`%APPDATA%/.homeassistant/custom_components/`目录中。
 
 **【HA中配置实例】**
 
@@ -25,6 +25,45 @@ molohub:
 molohub组件：<https://github.com/haoctopus/molohub>
 
 **【效果展现】**
+
+![img](README/molo_info.png)
+****
+![img](README/molo_login.png)
+****
+![img](README/molo_info2.png)
+****
+![img](README/molo_wechat_suc.png)
+
+****
+****
+
+## **【Description in English】**
+
+![img](README/xmolo-zx.png)
+
+This is a component forwards the local HA control web page to the public network, so that the public network can be easily accessed, and interact with the hardwares at home that has connected to the HA. For security reasons, this component needs to be authorized by Google, GitHub or Wechat Mini Program to work properly.
+
+when Home Assistant runs under the LAN, if you want to access the HA remotely through the WAN, the router under the network where the HA deployed must supports port mapping , and will be directly accessible on the public network after mapping. also generally ddns is also needed to solve ip change problem. But due to the network provider's The complexity of the network environment, and the complexity of the user's own internet environment, it is difficult to systematically summarize a set of general and effective methods to achieve the target. The above technology is more complicated to implement, and the threshold for ordinary users is higher. This project aims to simplify users to remotely access the local HA control network.
+
+**【Installation】**
+
+- [molohub component](https://github.com/haoctopus/molohub)
+
+Download `molohub` folder and put it under `%APPDATA%/.homeassistant/custom_components/`.
+
+**【Configuration】**
+
+```yaml
+molohub:
+```
+
+**【Reference link】**
+
+Platform entrance link：<http://www.molo.cn>
+
+molohub component：<https://github.com/haoctopus/molohub>
+
+**【Demonstration】**
 
 ![img](README/molo_info.png)
 ****
