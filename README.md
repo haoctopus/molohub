@@ -59,7 +59,17 @@ when Home Assistant runs under the LAN, if you want to access the HA remotely th
 
 - [molohub component](https://github.com/haoctopus/molohub)
 
-Download `molohub` folder and put it under `homeassistant configuration directory/custom_components/`.
+Download `molohub` folder and put it under `homeassistant configuration directory/custom_components/`. If `custom_components` doesn't exist, create one.
+
+- Where is homeassistant configuration directory?
+
+**Windows user:** `%APPDATA%\.homeassistant`
+
+**Linux-based user:** Run command line `locate .homeassistant/configuration.yaml`. The `.homeassistant` folder in the returning result is the configuration directory.
+
+**Docker user:** Go to Docker - Images - Homeassistant - Advanced settings - Volumes, the path corresponding to `/config` is the configuration directory.
+
+![img](README/docker.png)
 
 **【Configuration】**
 
