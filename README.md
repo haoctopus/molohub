@@ -10,7 +10,17 @@
 
 - [molohub组件](https://github.com/haoctopus/molohub)
 
-下载`molohub`文件夹，保存在`homeassistant配置目录/custom_components/`目录中。
+下载`molohub`文件夹，保存在`<homeassistant配置目录>/custom_components/`目录中，若`custom_components`目录不存在则自行创建。
+
+- homeassistant配置目录在哪?
+
+**Windows用户:** `%APPDATA%\.homeassistant`
+
+**Linux-based用户:** 可以通过执行`locate .homeassistant/configuration.yaml`命令，查找到的`.homeassistant`文件夹就是配置目录。
+
+**Docker用户:** 进入Docker - 映像 - homeassistant - 高级设置 - 卷, `/config`对应的路径就是配置目录
+
+![img](README/docker.png)
 
 **【HA中配置实例】**
 
