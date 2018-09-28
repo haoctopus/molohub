@@ -30,7 +30,7 @@ molohub:
 
 **【相关链接】**
 
-平台入口网站：<http://www.molo.cn>
+平台入口网站：<https://www.molo.cn>
 
 molohub组件：<https://github.com/haoctopus/molohub>
 
@@ -69,7 +69,7 @@ molohub:
 
 **【Reference link】**
 
-Platform entrance link：<http://www.molo.cn>
+Platform entrance link：<https://www.molo.cn>
 
 molohub component：<https://github.com/haoctopus/molohub>
 
