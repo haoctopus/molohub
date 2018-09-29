@@ -15,7 +15,7 @@ def get_config_path():
     if not path:
         return None
     path = path[:len(path) - 11]
-    print("Home Assistant configuration path found: %s", path)
+    print("Home Assistant configuration path found: %s" % (path))
     return path
 
 
@@ -92,7 +92,7 @@ if __name__ == '__main__':
     delete_file()
 
     print("Successfully installed.")
-    print("configuration.yaml has copied to configuration.yaml.bak")
+    print("configuration.yaml has backed up to configuration.yaml.bak")
     print("For any questions, please contact us:")
     print("  - Email:   octopus201806@gmail.com")
     print("  - QQGroup: 598514359")
