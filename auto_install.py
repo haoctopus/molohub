@@ -31,7 +31,7 @@ def uninstall_old(path):
 def download_file():
     global start_time
     print("Downloading file...")
-    curl = 'curl --silent --show-error --retry 5 https://codeload.github.com/haoctopus/molohub/zip/master >> molohub-master.zip'
+    curl = 'curl --show-error --retry 5 https://codeload.github.com/haoctopus/molohub/zip/master >> molohub-master.zip'
     os.system(curl)
 
 
