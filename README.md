@@ -6,17 +6,25 @@
 
 由于Home Assistant运行于局域网下, 想要通过外网远程访问HA, 首先HA部署环境所在网络下的路由器支持端口映射(port mapping), 映射后在公网通过ip:port直接访问，同时为了方便访问还需要一个ddns服务来把wan ip和动态域名绑定。但是由于网络供应商的网络环境复杂性, 以及用户自身内网环境复杂性, 很难系统性地总结一套通用有效的方法来实现. 上述技术实施起来比较繁琐, 对普通用户来说门槛较高, 本组件旨在简化用户进行远程访问本地HA控制网络.
 
-**【Linux/树莓派一键安装】**
+**【一键安装】**
 
-如果你是Linux-based用户，可以直接执行下面命令一键安装molohub:
+在终端直接执行下面命令一键安装molohub:
+
+- Linux / Raspberry pi:
 
 ```shell
 curl --silent --show-error --retry 5 https://raw.githubusercontent.com/haoctopus/molohub/master/auto_install.py | sudo python
 ```
 
+- Windows:
+
+```shell
+curl --silent --show-error --retry 5 https://raw.githubusercontent.com/haoctopus/molohub/master/auto_install.py | python
+```
+
 等待提示安装成功后手动重启Home Assistant即可。
 
-若此方法安装失败，请用下面的方法手动安装。
+若此方法安装失败，请用下面的方法手动安装。Windows用户请用cmd执行不要用PowerShell。
 
 **【安装软件】**
 
@@ -61,6 +69,7 @@ molohub组件：<https://github.com/haoctopus/molohub>
 如果安装和使用过程中遇到任何问题，可以通过以下方式联系我们，我们将在看到反馈后第一时间作出回应:
 
 Email: octopus201806@gmail.com
+
 QQ群: 598514359
 
 ****
@@ -74,17 +83,25 @@ This is a component forwards the local HA control web page to the public network
 
 when Home Assistant runs under the LAN, if you want to access the HA remotely through the WAN, the router under the network where the HA deployed must supports port mapping , and will be directly accessible on the public network after mapping. also generally ddns is also needed to solve ip change problem. But due to the network provider's The complexity of the network environment, and the complexity of the user's own internet environment, it is difficult to systematically summarize a set of general and effective methods to achieve the target. The above technology is more complicated to implement, and the threshold for ordinary users is higher. This project aims to simplify users to remotely access the local HA control network.
 
-**【Linux/Raspberry pi one-key install】**
+**【One-key install】**
 
 If you are Linux-based user, run the command below to install molohub automatically:
+
+- Linux / Raspberry pi:
 
 ```shell
 curl --silent --show-error --retry 5 https://raw.githubusercontent.com/haoctopus/molohub/master/auto_install.py | sudo python
 ```
 
+- Windows:
+
+```shell
+curl --silent --show-error --retry 5 https://raw.githubusercontent.com/haoctopus/molohub/master/auto_install.py | python
+```
+
 Wait untill installation success, and restart your Home Assistant.
 
-If this not working, please install molohub manually according to the next section.
+If this not working, please install molohub manually according to the next section. For Windows user, use cmd to run the command instead of PowerShell.
 
 **【Installation】**
 
@@ -129,4 +146,5 @@ molohub component：<https://github.com/haoctopus/molohub>
 Please contact us if you have any questions about installation and using molohub. We will respond as soon as we see the feedback.
 
 Email: octopus201806@gmail.com
+
 QQGroup: 598514359
