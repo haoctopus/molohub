@@ -38,18 +38,18 @@ def download_file():
 def extract_file():
     print("Extracting file...")
     try:
-        shutil.rmtree('temp/')
+        shutil.rmtree('molo_install_temp/')
     except Exception:
         pass
     with zipfile.ZipFile("molohub-master.zip", 'r') as f:
         for file in f.namelist():
-            f.extract(file, "temp/")
+            f.extract(file, "molo_install_temp/")
 
 
 def copy_file(path):
     print("Copying file...")
     path += '/custom_components/molohub'
-    frompath = 'temp/molohub-master/molohub'
+    frompath = 'molo_install_temp/molohub-master/molohub'
     shutil.copytree(frompath, path)
 
 
@@ -65,7 +65,7 @@ def configurate(path):
 
 
 def delete_file():
-    delete_list = ['auto_install.py', 'molohub-master.zip', 'temp/']
+    delete_list = ['auto_install.py', 'molohub-master.zip', 'molo_install_temp/']
     for item in delete_list:
         try:
             shutil.rmtree(item)
