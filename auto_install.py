@@ -1,24 +1,6 @@
 import os
-import sys
-import time
 import zipfile
 import shutil
-
-from urllib import request
-
-
-start_time = None
-def reporthook(blocknum, blocksize, totalsize):
-    speed = (blocknum * blocksize) / (time.time() - start_time)
-    # speed_str = " Speed: %.2f" % speed
-    speed_str = 'Speed: ' + str(int(speed / 1024)) + 'KB/s'
-    recv_size = blocknum * blocksize
-
-    # display process
-    size_str = 'Received: ' + str(int(recv_size / 1024)) + 'KB, '
-    sys.stdout.write(size_str + speed_str)
-    sys.stdout.flush()
-    sys.stdout.write('\r')
 
 
 def find(name, path):
@@ -42,26 +24,22 @@ def uninstall_old(path):
     path += '/custom_components/molohub'
     try:
         shutil.rmtree(path)
-    except FileNotFoundError:
+    except Exception:
         pass
 
 
 def download_file():
     global start_time
     print("Downloading file...")
-    save_path = 'molohub-master.zip'
-    url = 'https://codeload.github.com/haoctopus/molohub/zip/master'
-
-    start_time = time.time()
-    request.urlretrieve(url, save_path, reporthook)
-    print('')
+    curl = 'curl --silent --show-error --retry 5 https://codeload.github.com/haoctopus/molohub/zip/master >> molohub-master.zip'
+    os.system(curl)
 
 
 def extract_file():
     print("Extracting file...")
     try:
         shutil.rmtree('temp/')
-    except FileNotFoundError:
+    except Exception:
         pass
     with zipfile.ZipFile("molohub-master.zip", 'r') as f:
         for file in f.namelist():
@@ -80,7 +58,7 @@ def configurate(path):
     path += '/configuration.yaml'
     shutil.copy(path, path + '.bak')
     file_str = open(path, 'r').read()
-    if 'molohub:' in file_str:
+    if '\nmolohub:' in file_str:
         return
     with open(path, 'a') as f:
         f.write('\nmolohub:\n')
