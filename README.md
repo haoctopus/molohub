@@ -10,21 +10,13 @@
 
 在终端直接执行下面命令一键安装molohub:
 
-- Linux / Raspberry pi:
-
 ```shell
 curl --silent --show-error --retry 5 https://raw.githubusercontent.com/haoctopus/molohub/master/auto_install.py | sudo python
 ```
 
-- Windows:
-
-```shell
-curl --silent --show-error --retry 5 https://raw.githubusercontent.com/haoctopus/molohub/master/auto_install.py | python
-```
-
 等待提示安装成功后手动重启Home Assistant即可。
 
-若此方法安装失败，请用下面的方法手动安装。Windows用户请用cmd执行不要用PowerShell。
+若此方法安装失败，请用下面的方法手动安装。有`curl`组件的Windows用户也可以通过`cmd`执行一键安装（需要去掉命令中的`sudo`）。
 
 **【安装软件】**
 
@@ -87,21 +79,13 @@ when Home Assistant runs under the LAN, if you want to access the HA remotely th
 
 If you are Linux-based user, run the command below to install molohub automatically:
 
-- Linux / Raspberry pi:
-
 ```shell
 curl --silent --show-error --retry 5 https://raw.githubusercontent.com/haoctopus/molohub/master/auto_install.py | sudo python
 ```
 
-- Windows:
-
-```shell
-curl --silent --show-error --retry 5 https://raw.githubusercontent.com/haoctopus/molohub/master/auto_install.py | python
-```
-
 Wait untill installation success, and restart your Home Assistant.
 
-If this not working, please install molohub manually according to the next section. For Windows user, use cmd to run the command instead of PowerShell.
+If this not working, please install molohub manually according to the next section. For Windows user with `curl` component, remove `sudo` in command and run it in `cmd`.
 
 **【Installation】**
 
