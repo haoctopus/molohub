@@ -39,10 +39,15 @@ class MoloClientApp:
                 LOGGER.error("asyncore.loop exception")
 
             if not self.is_exited:
-                asyncore.close_all()
-                self.molo_client.sock_connect()
-                time.sleep(RECONNECT_INTERVAL)
-                LOGGER.info("moloserver reconnecting...")
+                try:
+                    asyncore.close_all()
+                    self.molo_client.sock_connect()
+                    time.sleep(RECONNECT_INTERVAL)
+                    LOGGER.info("moloserver reconnecting...")
+                except Exception as exc:
+                    print("proxy_loop(): " + str(exc))
+                    LOGGER.info("reconnect failed, retry...")
+                    time.sleep(RECONNECT_INTERVAL)
         asyncore.close_all()
         LOGGER.debug("proxy exited")
 
@@ -65,15 +70,20 @@ class MoloClientApp:
                 if self.molo_client:
                     self.set_ping_buffer(self.molo_client.ping_server_buffer())
                 time.sleep(self.ping_interval)
-            except EnvironmentError:
-                break
 
-            time_interval = time.time() - self.last_activate_time
-            LOGGER.debug("data interval: %f", time_interval)
-            if time_interval > PROXY_TCP_CONNECTION_ACTIVATE_TIME:
-                LOGGER.info("connection timeout, reconnecting server")
-                self.molo_client.handle_close()
-                self.reset_activate_time()
+                time_interval = time.time() - self.last_activate_time
+                LOGGER.debug("data interval: %f", time_interval)
+                if time_interval > PROXY_TCP_CONNECTION_ACTIVATE_TIME:
+                    LOGGER.info("connection timeout, reconnecting server")
+                    self.molo_client.handle_close()
+                    self.reset_activate_time()
+
+            except Exception as exc:
+                print("ping_server(): " + str(exc))
+                asyncore.close_all()
+                self.molo_client.sock_connect()
+                time.sleep(RECONNECT_INTERVAL)
+                LOGGER.info("moloserver reconnecting...")
 
     def reset_activate_time(self):
         """Reset last activate time for timeout."""

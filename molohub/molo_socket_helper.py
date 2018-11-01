@@ -2,7 +2,7 @@
 import platform
 
 from .const import CONFIG_FILE_NAME
-from .utils import get_local_seed, get_mac_addr, get_rand_char, save_local_seed
+from .utils import get_local_seed, get_mac_addr, get_rand_char, save_local_seed, load_uuid
 
 
 class MoloSocketHelper:
@@ -17,6 +17,7 @@ class MoloSocketHelper:
         payload['PyVersion'] = platform.python_version()
         payload['ClientVersion'] = client_version
         payload['HAVersion'] = ha_version
+        payload['UUID'] = load_uuid(hass)
 
         payload['MacAddr'] = get_mac_addr()
         local_seed = get_mac_addr()

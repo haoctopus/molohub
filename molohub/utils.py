@@ -2,8 +2,9 @@
 import logging
 import random
 import socket
-
+import uuid
 import yaml
+import json
 
 from .const import TCP_PACK_HEADER_LEN
 
@@ -85,3 +86,13 @@ def save_local_seed(config_file, local_seed):
             yaml.dump(config_data, wfile, default_flow_style=False)
     except (EnvironmentError, yaml.YAMLError):
         pass
+
+
+def load_uuid(hass, filename='.uuid'):
+    """Load UUID from a file or return None."""
+    try:
+        with open(hass.config.path(filename)) as fptr:
+            jsonf = json.loads(fptr.read())
+            return uuid.UUID(jsonf['uuid'], version=4).hex
+    except (ValueError, AttributeError, FileNotFoundError):
+        return None
