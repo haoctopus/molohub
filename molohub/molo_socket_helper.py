@@ -20,7 +20,7 @@ class MoloSocketHelper:
         payload['UUID'] = load_uuid(hass)
 
         payload['MacAddr'] = get_mac_addr()
-        local_seed = get_mac_addr()
+        local_seed = get_rand_char(32).lower()
         local_seed_saved = get_local_seed(hass.config.path(CONFIG_FILE_NAME))
         if local_seed_saved:
             local_seed = local_seed_saved
