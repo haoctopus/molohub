@@ -53,7 +53,7 @@ molohub:
 >molohub0:
 >```
 >
-> 4. 手动重启Home Assistant, 完成
+> 4. 手动重启Home Assistant, 完成. 同理可以添加任意多个molohub.
 
 **【相关链接】**
 
@@ -137,7 +137,7 @@ If you need to bind multiple molohubs to control HA with your family, you can op
 >molohub0:
 >```
 >
-> 4. manully restart Home Assistant, done
+> 4. manully restart Home Assistant, done. You can add as more as you want by using this method
 
 **【Reference link】**
 
