@@ -8,7 +8,8 @@ def run_proxy(hass):
     """Run Molohub application."""
     molo_client = MoloHubClient(
         MOLO_CONFIGS.get_config_object()['server']['host'],
-        int(MOLO_CONFIGS.get_config_object()['server']['port']))
+        int(MOLO_CONFIGS.get_config_object()['server']['port']),
+        MOLO_CLIENT_APP.async_map)
     MOLO_CLIENT_APP.run_reverse_proxy(hass, molo_client)
 
 

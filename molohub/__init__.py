@@ -5,6 +5,8 @@ For more details about this component, please refer to the documentation at
 https://home-assistant.io/components/molohub/
 """
 
+import os
+
 from homeassistant.const import (EVENT_HOMEASSISTANT_START,
                                  EVENT_HOMEASSISTANT_STOP, EVENT_STATE_CHANGED)
 
@@ -13,12 +15,24 @@ from .notify_state import NOTIFY_STATE
 from .utils import LOGGER
 
 DOMAIN = 'molohub'
-NOTIFYID = 'molouhubnotifyid'
-
+NOTIFYID = 'molo_notify_'
+DISMISSABLE = False
 
 def setup(hass, config):
+    global DOMAIN
+    global NOTIFYID
+    global DISMISSABLE
     """Set up molohub component."""
     LOGGER.info("Begin setup molohub!")
+
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    path_list = None
+    if '/' in dir_path:
+        path_list = dir_path.split('/')
+    elif '\\' in dir_path:
+        path_list = dir_path.split('\\')
+    DOMAIN = path_list[len(path_list) - 1]
+    NOTIFYID += DOMAIN
 
     # Load config mode from configuration.yaml.
     cfg = config[DOMAIN]
@@ -28,6 +42,11 @@ def setup(hass, config):
         MOLO_CONFIGS.load('release')
     tmp_haweb = MOLO_CONFIGS.get_config_object()['server']['haweb']
     NOTIFY_STATE.set_context(hass, tmp_haweb)
+
+    DISMISSABLE = cfg.get('dismissable', False)
+    if type(DISMISSABLE) != bool:
+        DISMISSABLE = False
+    MOLO_CONFIGS.get_config_object()['multiple_name'] = DOMAIN
 
     if 'http' in config and 'server_host' in config['http']:
         tmp_host = config['http']['server_host']
@@ -59,8 +78,10 @@ def setup(hass, config):
         send_notify(NOTIFY_STATE.get_notify_str())
 
     async def on_state_changed(event):
-        """Disable the dismiss button."""
+        """Disable the dismiss button if needed."""
         global NOTIFYID
+        if not DISMISSABLE:
+            return
         state = event.data.get('new_state')
         entity_id = event.data.get('entity_id')
         if not state and entity_id and entity_id.find(NOTIFYID) != -1:

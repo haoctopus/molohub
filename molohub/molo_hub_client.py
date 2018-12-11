@@ -16,7 +16,6 @@ from .notify_state import NOTIFY_STATE
 from .remote_sesstion import RemoteSession
 from .utils import LOGGER, dns_open, get_rand_char, save_local_seed
 
-
 class MoloHubClient(asyncore.dispatcher):
     """Client protocol class for Molohub."""
 
@@ -33,9 +32,9 @@ class MoloHubClient(asyncore.dispatcher):
 
     protocol_func_bind_map = {}
 
-    def __init__(self, host, port):
+    def __init__(self, host, port, map):
         """Initialize protocol arguments."""
-        asyncore.dispatcher.__init__(self)
+        asyncore.dispatcher.__init__(self, map=map)
         self.host = host
         self.port = port
         self.molo_tcp_pack = MoloTcpPack()
@@ -51,10 +50,11 @@ class MoloHubClient(asyncore.dispatcher):
         """When connected, this method will be call."""
         LOGGER.debug("server connected")
         self.append_connect = False
+        multiple_name = MOLO_CONFIGS.get_config_object().get('multiple_name', '')
         self.send_dict_pack(
             MoloSocketHelper.molo_auth(CLIENT_VERSION,
                                        MOLO_CLIENT_APP.hass_context,
-                                       __short_version__))
+                                       __short_version__, multiple_name),)
 
     def handle_close(self):
         """When closed, this method will be call. clean itself."""
@@ -69,9 +69,12 @@ class MoloHubClient(asyncore.dispatcher):
 
     def handle_read(self):
         """Handle read message."""
-        buff = self.recv(BUFFER_SIZE)
-        self.append_recv_buffer += buff
-        self.process_molo_tcp_pack()
+        try:
+            buff = self.recv(BUFFER_SIZE)
+            self.append_recv_buffer += buff
+            self.process_molo_tcp_pack()
+        except Exception as e:
+            LOGGER.info("recv error: %s", e)
 
     def writable(self):
         """If the socket send buffer writable."""
@@ -125,7 +128,8 @@ class MoloHubClient(asyncore.dispatcher):
                      self.tunnel['lhost'], self.tunnel['lport'])
         remotesession = RemoteSession(self.client_id, self.host, self.port,
                                       self.tunnel['lhost'],
-                                      self.tunnel['lport'])
+                                      self.tunnel['lport'],
+                                      MOLO_CLIENT_APP.async_map)
         remotesession.sock_connect()
 
     def on_auth_resp(self, jdata):
@@ -179,8 +183,13 @@ class MoloHubClient(asyncore.dispatcher):
     def on_reset_clientid(self, jdata):
         """Handle on_reset_clientid json packet."""
         local_seed = get_rand_char(32).lower()
+        config_file_name = MOLO_CONFIGS.get_config_object().get('multiple_name', '')
+        if config_file_name:
+            config_file_name = CONFIG_FILE_NAME + '_' + config_file_name + '.yaml'
+        else:
+            config_file_name = CONFIG_FILE_NAME + '.yaml'
         save_local_seed(
-            MOLO_CLIENT_APP.hass_context.config.path(CONFIG_FILE_NAME),
+            MOLO_CLIENT_APP.hass_context.config.path(config_file_name),
             local_seed)
         LOGGER.debug("reset clientid %s to %s", self.client_id, local_seed)
         self.handle_close()

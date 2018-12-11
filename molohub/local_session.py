@@ -10,9 +10,9 @@ from .utils import LOGGER, dns_open
 class LocalSession(asyncore.dispatcher):
     """Local proxy session class."""
 
-    def __init__(self, host, port):
+    def __init__(self, host, port, map):
         """Initialize local proxy session arguments."""
-        asyncore.dispatcher.__init__(self)
+        asyncore.dispatcher.__init__(self, map=map)
         self.host = host
         self.port = port
         self.append_send_buffer = None

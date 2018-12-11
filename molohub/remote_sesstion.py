@@ -22,9 +22,9 @@ class RemoteSession(asyncore.dispatcher):
     tunnel['lhost'] = MOLO_CONFIGS.get_config_object()['ha']['host']
     tunnel['lport'] = MOLO_CONFIGS.get_config_object()['ha']['port']
 
-    def __init__(self, client_id, rhost, rport, lhost, lport):
+    def __init__(self, client_id, rhost, rport, lhost, lport, map):
         """Initialize remote session arguments."""
-        asyncore.dispatcher.__init__(self)
+        asyncore.dispatcher.__init__(self, map=map)
         self.client_id = client_id
         self.lhost = lhost
         self.lport = lport
@@ -93,7 +93,7 @@ class RemoteSession(asyncore.dispatcher):
     def on_start_proxy(self, jdata):
         """Handle Start Proxy."""
         LOGGER.debug("on_start_proxy %s", str(jdata))
-        localsession = LocalSession(self.lhost, self.lport)
+        localsession = LocalSession(self.lhost, self.lport, MOLO_CLIENT_APP.async_map)
         MOLO_CLIENT_APP.local_session_dict[id(self)] = localsession
         MOLO_CLIENT_APP.remote_session_dict[id(localsession)] = self
         LOGGER.debug("remote local (%d)<->(%d)", id(self), id(localsession))

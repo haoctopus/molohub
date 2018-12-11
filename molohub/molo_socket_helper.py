@@ -9,7 +9,7 @@ class MoloSocketHelper:
     """Socket helper class for Molohub."""
 
     @classmethod
-    def molo_auth(cls, client_version, hass, ha_version):
+    def molo_auth(cls, client_version, hass, ha_version, multiple_name):
         """Construct register authorization packet."""
         payload = dict()
         payload['ClientId'] = ''
@@ -19,13 +19,18 @@ class MoloSocketHelper:
         payload['HAVersion'] = ha_version
         payload['UUID'] = load_uuid(hass)
 
+        if multiple_name:
+            config_file_name = CONFIG_FILE_NAME + '_' + multiple_name + '.yaml'
+        else:
+            config_file_name = CONFIG_FILE_NAME + '.yaml'
+
         payload['MacAddr'] = get_mac_addr()
         local_seed = get_rand_char(32).lower()
-        local_seed_saved = get_local_seed(hass.config.path(CONFIG_FILE_NAME))
+        local_seed_saved = get_local_seed(hass.config.path(config_file_name))
         if local_seed_saved:
             local_seed = local_seed_saved
         else:
-            save_local_seed(hass.config.path(CONFIG_FILE_NAME), local_seed)
+            save_local_seed(hass.config.path(config_file_name), local_seed)
         payload['LocalSeed'] = local_seed
 
         body = dict()

@@ -19,7 +19,7 @@ BIND_AUTH_STR_TEMPLATE_DEFAULT = """
 
 BUFFER_SIZE = 1024
 
-CLIENT_VERSION = '0.13'
+CLIENT_VERSION = '0.14'
 CONNECTED = 1
 
 HTTP_502_BODY = """
@@ -56,7 +56,7 @@ TOKEN_KEY_NAME = 'slavertoken'
 CLIENT_STATUS_UNBINDED = "unbinded"
 CLIENT_STATUS_BINDED = "binded"
 
-CONFIG_FILE_NAME = "molo_client_config.yaml"
+CONFIG_FILE_NAME = "molo_client_config"
 
 WAIT_FOR_AUTH_STR_TEMPLATE_DEFAULT = """
 Choose platform below to connect:

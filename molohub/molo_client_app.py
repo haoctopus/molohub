@@ -27,13 +27,14 @@ class MoloClientApp:
         self.ping_buffer = None
         self.hass_context = None
         self.reset_activate_time()
+        self.async_map = {}
 
     def proxy_loop(self):
         """Handle main loop and reconnection."""
         self.molo_client.sock_connect()
         while not self.is_exited:
             try:
-                asyncore.loop()
+                asyncore.loop(map=self.async_map)
             except asyncore.ExitNow as exc:
                 logging.exception(exc)
                 LOGGER.error("asyncore.loop exception")
