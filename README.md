@@ -38,7 +38,22 @@ curl --silent --show-error --retry 5 https://raw.githubusercontent.com/haoctopus
 
 ```yaml
 molohub:
+  dismissable: true  # 默认状态下忽略按钮不可用,添加此行来激活忽略按钮.
 ```
+
+**【多开教程】**
+
+如果你需要绑定多个molohub, 与家人一起控制HA, 可以通过以下步骤实现molohub多开:
+
+> 1. 进入到homeassistant配置目录的`custom_components`文件夹
+> 2. 复制粘贴`molohub`文件取名为`molohub0`
+> 3. 修改homeassistant配置目录下的`configuration.yaml`, 添加如下一行代码
+>
+>```yaml
+>molohub0:
+>```
+>
+> 4. 手动重启Home Assistant, 完成
 
 **【相关链接】**
 
@@ -107,7 +122,22 @@ Download `molohub` folder and put it under `homeassistant configuration director
 
 ```yaml
 molohub:
+  dismissable: true  # Dismiss button is disable by default, add this line to enable.
 ```
+
+**【Mulit-client】**
+
+If you need to bind multiple molohubs to control HA with your family, you can open more molohub by following the steps below:
+
+> 1. goto homeassistant configuration directory's `custom_components` folder
+> 2. copy paste `molohub` folder named `molohub0`
+> 3. modify homeassistant configuration file `configuration.yaml`, add a line as below:
+>
+>```yaml
+>molohub0:
+>```
+>
+> 4. manully restart Home Assistant, done
 
 **【Reference link】**
 
