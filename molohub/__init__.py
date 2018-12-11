@@ -80,7 +80,7 @@ def setup(hass, config):
     async def on_state_changed(event):
         """Disable the dismiss button if needed."""
         global NOTIFYID
-        if not DISMISSABLE:
+        if DISMISSABLE:
             return
         state = event.data.get('new_state')
         entity_id = event.data.get('entity_id')
