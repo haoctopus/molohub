@@ -9,7 +9,7 @@ class MoloSocketHelper:
     """Socket helper class for Molohub."""
 
     @classmethod
-    def molo_auth(cls, client_version, hass, ha_version, multiple_name):
+    def molo_auth(cls, client_version, hass, ha_version, domain):
         """Construct register authorization packet."""
         payload = dict()
         payload['ClientId'] = ''
@@ -19,8 +19,8 @@ class MoloSocketHelper:
         payload['HAVersion'] = ha_version
         payload['UUID'] = load_uuid(hass)
 
-        if multiple_name:
-            config_file_name = CONFIG_FILE_NAME + '_' + multiple_name + '.yaml'
+        if domain and domain!='molohub':
+            config_file_name = CONFIG_FILE_NAME + '_' + domain + '.yaml'
         else:
             config_file_name = CONFIG_FILE_NAME + '.yaml'
 

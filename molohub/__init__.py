@@ -46,7 +46,7 @@ def setup(hass, config):
     DISMISSABLE = cfg.get('dismissable', False)
     if type(DISMISSABLE) != bool:
         DISMISSABLE = False
-    MOLO_CONFIGS.get_config_object()['multiple_name'] = DOMAIN
+    MOLO_CONFIGS.get_config_object()['domain'] = DOMAIN
 
     if 'http' in config and 'server_host' in config['http']:
         tmp_host = config['http']['server_host']

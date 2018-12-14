@@ -50,11 +50,11 @@ class MoloHubClient(asyncore.dispatcher):
         """When connected, this method will be call."""
         LOGGER.debug("server connected")
         self.append_connect = False
-        multiple_name = MOLO_CONFIGS.get_config_object().get('multiple_name', '')
+        domain = MOLO_CONFIGS.get_config_object().get('domain', '')
         self.send_dict_pack(
             MoloSocketHelper.molo_auth(CLIENT_VERSION,
                                        MOLO_CLIENT_APP.hass_context,
-                                       __short_version__, multiple_name),)
+                                       __short_version__, domain),)
 
     def handle_close(self):
         """When closed, this method will be call. clean itself."""
@@ -183,8 +183,9 @@ class MoloHubClient(asyncore.dispatcher):
     def on_reset_clientid(self, jdata):
         """Handle on_reset_clientid json packet."""
         local_seed = get_rand_char(32).lower()
-        config_file_name = MOLO_CONFIGS.get_config_object().get('multiple_name', '')
-        if config_file_name:
+        config_file_name = MOLO_CONFIGS.get_config_object().get('domain', '')
+        #keep Compatibility  with old version
+        if config_file_name and config_file_name!='molohub':
             config_file_name = CONFIG_FILE_NAME + '_' + config_file_name + '.yaml'
         else:
             config_file_name = CONFIG_FILE_NAME + '.yaml'
